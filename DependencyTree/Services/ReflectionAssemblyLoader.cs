@@ -1,10 +1,13 @@
-﻿using System.IO;
+﻿using System.ComponentModel.Composition;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using DependencyTree.Domain;
 
 namespace DependencyTree.Services
 {
+    [Export(typeof(IReflectionAssemblyLoader))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class ReflectionAssemblyLoader : IReflectionAssemblyLoader
     {
         private readonly IOpenFileService _openFileService = new OpenFileService();

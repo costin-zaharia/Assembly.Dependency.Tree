@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,20 +15,25 @@ using Prism.Commands;
 
 namespace DependencyTree.Controls
 {
+    [Export(typeof(DependencyTreeControlViewModel))]
     public class DependencyTreeControlViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly List<AssemblyInfoViewModel> _dependencies = new List<AssemblyInfoViewModel>();
-        private readonly IOpenFileService _openFileService = new OpenFileService();
-        private readonly IDependencyTreeLoader _dependencyTreeLoader = new DependencyTreeLoader();
+        private readonly IOpenFileService _openFileService;
+        private readonly IDependencyTreeLoader _dependencyTreeLoader;
 
         private AssemblyInfo _root;
         private string _dependenciesFilter;
         private string _fileName;
 
-        public DependencyTreeControlViewModel()
+        [ImportingConstructor]
+        public DependencyTreeControlViewModel(IOpenFileService openFileService, IDependencyTreeLoader dependencyTreeLoader)
         {
+            _openFileService = openFileService;
+            _dependencyTreeLoader = dependencyTreeLoader;
+
             SelectFileCommand = new DelegateCommand(HandleSelectFileCommand);
 
             Dependencies = new ListCollectionView(_dependencies)

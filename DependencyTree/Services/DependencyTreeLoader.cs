@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,8 @@ using DependencyTree.Domain;
 
 namespace DependencyTree.Services
 {
+    [Export(typeof(IDependencyTreeLoader))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public class DependencyTreeLoader : IDependencyTreeLoader
     {
         private readonly IReflectionAssemblyLoader _reflectionAssemblyLoader = new ReflectionAssemblyLoader();
