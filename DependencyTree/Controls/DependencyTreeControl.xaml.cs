@@ -7,8 +7,6 @@ namespace DependencyTree.Controls
         public DependencyTreeControl()
         {
             InitializeComponent();
-
-            DataContext = new DependencyTreeControlViewModel();
         }
     }
 }
