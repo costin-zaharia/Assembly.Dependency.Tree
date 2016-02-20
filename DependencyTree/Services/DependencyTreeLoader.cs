@@ -12,11 +12,17 @@ namespace DependencyTree.Services
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class DependencyTreeLoader : IDependencyTreeLoader
     {
-        private readonly IReflectionAssemblyLoader _reflectionAssemblyLoader = new ReflectionAssemblyLoader();
+        private readonly IReflectionAssemblyLoader _reflectionAssemblyLoader;
 
         // TODO: These assemblyes can have cyclic dependencies. We need to handle this, but for now, we will skip searching of dependencies for them.
         private readonly List<string> _ignoreList = new List<string> { "System", "IKVM", "Presentation" };
         private readonly List<string> _userIgnored = new List<string> { "DevExpress" };
+
+        [ImportingConstructor]
+        public DependencyTreeLoader(IReflectionAssemblyLoader reflectionAssemblyLoader)
+        {
+            _reflectionAssemblyLoader = reflectionAssemblyLoader;
+        }
 
         public AssemblyInfo LoadDependencyTree(string filePath)
         {

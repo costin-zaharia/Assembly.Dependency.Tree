@@ -10,7 +10,13 @@ namespace DependencyTree.Services
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class ReflectionAssemblyLoader : IReflectionAssemblyLoader
     {
-        private readonly IOpenFileService _openFileService = new OpenFileService();
+        private readonly IOpenFileService _openFileService;
+
+        [ImportingConstructor]
+        public ReflectionAssemblyLoader(IOpenFileService openFileService)
+        {
+            _openFileService = openFileService;
+        }
 
         public AssemblyInfo LoadAssembly(AssemblyName assemblyName, string path)
         {
