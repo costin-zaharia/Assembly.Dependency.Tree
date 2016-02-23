@@ -48,9 +48,11 @@ namespace DependencyTree.Services.AssemblyLoad
 
         private Assembly LoadFromUserSelectedPath(AssemblyName assemblyName)
         {
-            _notificationService.ShowMessage($"Could not find {assemblyName.Name}: {assemblyName.Version}. Please select the file!", $"{assemblyName.Name}: {assemblyName.Version}");
+            var description = $"{assemblyName.Name}: {assemblyName.Version}";
 
-            var fileName = _openFileService.GetSelectedFile();
+            _notificationService.ShowMessage($"Could not find {description}. Please select the file!", description);
+
+            var fileName = _openFileService.GetSelectedFile(description);
             return string.IsNullOrEmpty(fileName)
                 ? null
                 : _assemblyWrapper.TryReflectionOnlyLoadFrom(assemblyName, fileName);

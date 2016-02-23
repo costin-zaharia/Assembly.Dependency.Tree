@@ -7,15 +7,16 @@ namespace DependencyTree.Services.Notifications
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class OpenFileService : IOpenFileService
     {
-        private readonly OpenFileDialog _openFileDialog = new OpenFileDialog
+        public string GetSelectedFile(string tile)
         {
-            Filter = "Assembly (*.dll)|*.dll"
-        };
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Assembly (*.dll)|*.dll",
+                Title = tile
+            };
 
-        public string GetSelectedFile()
-        {
-            return _openFileDialog.ShowDialog() == true
-                ? _openFileDialog.FileName
+            return openFileDialog.ShowDialog() == true
+                ? openFileDialog.FileName
                 : string.Empty;
         }
     }

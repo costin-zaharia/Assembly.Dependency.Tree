@@ -2,6 +2,6 @@
 {
     public interface IOpenFileService
     {
-        string GetSelectedFile();
+        string GetSelectedFile(string title);
     }
 }

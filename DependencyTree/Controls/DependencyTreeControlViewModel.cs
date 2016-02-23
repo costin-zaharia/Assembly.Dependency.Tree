@@ -91,7 +91,7 @@ namespace DependencyTree.Controls
 
         private void HandleSelectFileCommand()
         {
-            var selectedFile = _openFileService.GetSelectedFile();
+            var selectedFile = _openFileService.GetSelectedFile(string.Empty);
             if (string.IsNullOrEmpty(selectedFile))
                 return;
 
