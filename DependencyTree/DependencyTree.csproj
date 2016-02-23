@@ -91,7 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Common\AssemblyNameEqualityComparer.cs" />
-    <Compile Include="Services\AssemblyLoad\AssembyWrapper.cs" />
+    <Compile Include="Services\AssemblyLoad\AssemblyWrapper.cs" />
     <Compile Include="Services\DependencyTreeLoader.cs" />
     <Compile Include="Services\Cache\DiskAssemblyCache.cs" />
     <Compile Include="Services\Cache\IAssemblyCache.cs" />
