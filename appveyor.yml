@@ -19,5 +19,3 @@ before_build:
   
 build:
   project: src\DependencyTree.sln
-  
-artifacts:
