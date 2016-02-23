@@ -91,6 +91,8 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Services\DependencyTreeLoader.cs" />
+    <Compile Include="Services\DiskAssemblyCache.cs" />
+    <Compile Include="Services\IAssemblyCache.cs" />
     <Compile Include="Services\IDependencyTreeLoader.cs" />
     <Compile Include="Services\IOpenFileService.cs" />
     <Compile Include="Services\IReflectionAssemblyLoader.cs" />

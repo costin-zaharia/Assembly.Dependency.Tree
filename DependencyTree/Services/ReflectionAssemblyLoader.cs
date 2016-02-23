@@ -11,11 +11,13 @@ namespace DependencyTree.Services
     public class ReflectionAssemblyLoader : IReflectionAssemblyLoader
     {
         private readonly IOpenFileService _openFileService;
+        private readonly IAssemblyCache _assemblyCache;
 
         [ImportingConstructor]
-        public ReflectionAssemblyLoader(IOpenFileService openFileService)
+        public ReflectionAssemblyLoader(IOpenFileService openFileService, IAssemblyCache assemblyCache)
         {
             _openFileService = openFileService;
+            _assemblyCache = assemblyCache;
         }
 
         public AssemblyInfo LoadAssembly(AssemblyName assemblyName, string path)
@@ -26,7 +28,13 @@ namespace DependencyTree.Services
             }
             catch
             {
-                var assembly = LoadAssemblyByName(path, assemblyName);
+                var assembly = GetFromCache(assemblyName);
+                if (assembly == null)
+                {
+                    assembly = LoadAssemblyByName(path, assemblyName);
+                    _assemblyCache.AddToCache(assembly);
+                }
+
                 if (assembly != null)
                     return new AssemblyInfo(assembly);
             }
@@ -61,6 +69,11 @@ namespace DependencyTree.Services
             {
                 return null;
             }
+        }
+
+        private Assembly GetFromCache(AssemblyName assemblyName)
+        {
+            return TryToLoadAssemblyByName(_assemblyCache.GetCacheFilePath(assemblyName), assemblyName);
         }
     }
 }
