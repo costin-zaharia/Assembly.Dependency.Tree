@@ -23,33 +23,37 @@ namespace DependencyTree.Services.AssemblyLoad
 
         public Assembly LoadAssembly(AssemblyName assemblyName, string path)
         {
-            try
-            {
-                return _assemblyWrapper.ReflectionOnlyLoad(assemblyName.FullName);
-            }
-            catch
-            {
-                var assembly = LoadAssembly(path, assemblyName);
-                if (assembly != null)
-                    return assembly;
-            }
-
-            return null;
-        }
-
-        private Assembly LoadAssembly(string path, AssemblyName assemblyName)
-        {
-            var fileName = Path.Combine(path, assemblyName.Name + ".dll");
-            var assembly = _assemblyWrapper.TryReflectionOnlyLoadFrom(fileName, assemblyName);
+            var assembly = LoadByName(assemblyName.FullName);
             if (assembly != null)
                 return assembly;
 
+            assembly = LoadFromPath(assemblyName, path);
+            if (assembly != null)
+                return assembly;
+
+            return LoadFromUserSelectedPath(assemblyName);
+        }
+
+        private Assembly LoadByName(string fullName)
+        {
+            return _assemblyWrapper.TryReflectionOnlyLoad(fullName);
+        }
+
+        private Assembly LoadFromPath(AssemblyName assemblyName, string path)
+        {
+            var fileName = Path.Combine(path, assemblyName.Name + ".dll");
+
+            return _assemblyWrapper.TryReflectionOnlyLoadFrom(assemblyName, fileName);
+        }
+
+        private Assembly LoadFromUserSelectedPath(AssemblyName assemblyName)
+        {
             _notificationService.ShowMessage($"Could not find {assemblyName.Name}: {assemblyName.Version}. Please select the file!", $"{assemblyName.Name}: {assemblyName.Version}");
 
-            fileName = _openFileService.GetSelectedFile();
+            var fileName = _openFileService.GetSelectedFile();
             return string.IsNullOrEmpty(fileName)
                 ? null
-                : _assemblyWrapper.TryReflectionOnlyLoadFrom(fileName, assemblyName);
+                : _assemblyWrapper.TryReflectionOnlyLoadFrom(assemblyName, fileName);
         }
     }
 }

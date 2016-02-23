@@ -26,13 +26,25 @@ namespace DependencyTree.Services.AssemblyLoad
             return Assembly.ReflectionOnlyLoad(path);
         }
 
-        public Assembly TryReflectionOnlyLoadFrom(string fileName, AssemblyName assemblyName)
+        public Assembly TryReflectionOnlyLoadFrom(AssemblyName assemblyName, string fileName)
         {
             try
             {
-                var assembly = Assembly.ReflectionOnlyLoadFrom(fileName);
+                var assembly = ReflectionOnlyLoadFrom(fileName);
 
                 return _assemblyNamEqualityComparer.Equals(assembly.GetName(), assemblyName) ? assembly : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Assembly TryReflectionOnlyLoad(string fullName)
+        {
+            try
+            {
+                return ReflectionOnlyLoad(fullName);
             }
             catch
             {

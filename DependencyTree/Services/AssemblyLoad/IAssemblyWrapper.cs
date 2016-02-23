@@ -8,6 +8,8 @@ namespace DependencyTree.Services.AssemblyLoad
 
         Assembly ReflectionOnlyLoadFrom(string path);
 
-        Assembly TryReflectionOnlyLoadFrom(string fileName, AssemblyName assemblyName);
+        Assembly TryReflectionOnlyLoad(string fullName);
+
+        Assembly TryReflectionOnlyLoadFrom(AssemblyName assemblyName, string fileName);
     }
 }

@@ -41,7 +41,7 @@ namespace DependencyTree.Services.Cache
 
         public Assembly Get(AssemblyName assemblyName)
         {
-            return _assemblyWrapper.TryReflectionOnlyLoadFrom(GetCacheFilePath(assemblyName), assemblyName);
+            return _assemblyWrapper.TryReflectionOnlyLoadFrom(assemblyName, GetCacheFilePath(assemblyName));
         }
 
         private string GetCacheFilePath(AssemblyName assemblyName)
