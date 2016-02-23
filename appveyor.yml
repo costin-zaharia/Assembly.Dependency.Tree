@@ -15,10 +15,9 @@ platform: Any CPU
 configuration: Release
 
 before_build:
-  - nuget restore DependencyTree.sln
+  - nuget restore src\DependencyTree.sln
   
 build:
-  project: DependencyTree.sln
+  project: src\DependencyTree.sln
   
 artifacts:
-  - path: '\DependencyTree\bin\Release\DependencyTree.exe'
