@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Microsoft.Win32;
 
-namespace DependencyTree.Services
+namespace DependencyTree.Services.Notifications
 {
     [Export(typeof(IOpenFileService))]
     [PartCreationPolicy(CreationPolicy.Shared)]

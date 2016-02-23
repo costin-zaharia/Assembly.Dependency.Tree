@@ -1,4 +1,4 @@
-﻿namespace DependencyTree.Services
+﻿namespace DependencyTree.Services.Notifications
 {
     public interface IOpenFileService
     {

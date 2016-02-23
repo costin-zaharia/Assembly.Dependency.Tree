@@ -11,6 +11,7 @@ using DependencyTree.Common;
 using DependencyTree.Domain;
 using DependencyTree.Mixins;
 using DependencyTree.Services;
+using DependencyTree.Services.Notifications;
 using Prism.Commands;
 
 namespace DependencyTree.Controls

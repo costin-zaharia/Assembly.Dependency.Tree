@@ -90,14 +90,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Common\AssemblyNameEqualityComparer.cs" />
+    <Compile Include="Services\AssemblyLoad\AssembyWrapper.cs" />
     <Compile Include="Services\DependencyTreeLoader.cs" />
-    <Compile Include="Services\DiskAssemblyCache.cs" />
-    <Compile Include="Services\IAssemblyCache.cs" />
+    <Compile Include="Services\Cache\DiskAssemblyCache.cs" />
+    <Compile Include="Services\Cache\IAssemblyCache.cs" />
+    <Compile Include="Services\AssemblyLoad\IAssemblyWrapper.cs" />
     <Compile Include="Services\IDependencyTreeLoader.cs" />
-    <Compile Include="Services\IOpenFileService.cs" />
-    <Compile Include="Services\IReflectionAssemblyLoader.cs" />
-    <Compile Include="Services\OpenFileService.cs" />
-    <Compile Include="Services\ReflectionAssemblyLoader.cs" />
+    <Compile Include="Services\Notifications\IOpenFileService.cs" />
+    <Compile Include="Services\AssemblyLoad\IReflectionAssemblyLoader.cs" />
+    <Compile Include="Services\Notifications\INotificationService.cs" />
+    <Compile Include="Services\Notifications\NotificationService.cs" />
+    <Compile Include="Services\Notifications\OpenFileService.cs" />
+    <Compile Include="Services\AssemblyLoad\ReflectionAssemblyLoader.cs" />
     <Page Include="Controls\DependencyTreeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
