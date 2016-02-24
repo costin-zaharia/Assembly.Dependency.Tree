@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace DependencyTree.Controls
+﻿namespace DependencyTree.Controls
 {
-    public partial class DependencyTreeControl : UserControl
+    public partial class DependencyTreeControl
     {
         public DependencyTreeControl()
         {
