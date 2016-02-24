@@ -6,12 +6,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
-using DependencyTree.Annotations;
 using DependencyTree.Common;
 using DependencyTree.Domain;
 using DependencyTree.Mixins;
 using DependencyTree.Services;
 using DependencyTree.Services.Notifications;
+using JetBrains.Annotations;
 using Prism.Commands;
 
 namespace DependencyTree.Controls

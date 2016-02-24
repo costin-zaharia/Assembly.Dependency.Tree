@@ -14,7 +14,7 @@ namespace DependencyTree.Services.AssemblyLoad
         private readonly INotificationService _notificationService;
 
         [ImportingConstructor]
-        public ReflectionAssemblyLoader(IAssemblyWrapper assemblyWrapper, IOpenFileService openFileService,  INotificationService notificationService)
+        public ReflectionAssemblyLoader(IAssemblyWrapper assemblyWrapper, IOpenFileService openFileService, INotificationService notificationService)
         {
             _assemblyWrapper = assemblyWrapper;
             _openFileService = openFileService;
