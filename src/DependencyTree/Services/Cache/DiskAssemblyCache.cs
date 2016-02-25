@@ -29,6 +29,9 @@ namespace DependencyTree.Services.Cache
                 return;
 
             var assemblyName = assembly.GetName();
+            var filePath = Path.Combine(_cacheFolder, GetCacheFilePath(assemblyName));
+            if (File.Exists(filePath))
+                return;
 
             if (!Directory.Exists(Path.Combine(_cacheFolder, assemblyName.Name)))
                 Directory.CreateDirectory(Path.Combine(_cacheFolder, assemblyName.Name));
@@ -36,7 +39,7 @@ namespace DependencyTree.Services.Cache
             if (!Directory.Exists(Path.Combine(_cacheFolder, assemblyName.Name, assemblyName.Version.ToString())))
                 Directory.CreateDirectory(Path.Combine(_cacheFolder, assemblyName.Name, assemblyName.Version.ToString()));
 
-            File.Copy(assembly.Location, Path.Combine(_cacheFolder, GetCacheFilePath(assemblyName)));
+            File.Copy(assembly.Location, filePath);
         }
 
         public Assembly Get(AssemblyName assemblyName)
